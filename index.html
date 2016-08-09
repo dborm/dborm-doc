@@ -1,0 +1,154 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UEditor Docs</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+    <!--markdown.js-->
+    <script src="plugins/markdown.js"></script>
+    <!--jquery and bootstrap-->
+    <script src="plugins/jquery-2.0.3.min.js"></script>
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css"/>
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--code highlight-->
+    <script src="plugins/prettify/prettify.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="plugins/prettify/prettify.css">
+    <!--doc css-->
+    <link rel="stylesheet" href="css/doc.css"/>
+
+    <script src="js/beautify.js"></script>
+    <script src="js/beautify-css.js"></script>
+    <script src="js/beautify-html.js"></script>
+    <style>
+        p{
+            text-align: justify;
+            text-indent: 2em;
+        }
+        li p {
+            text-align: left;
+            text-indent: 0em;
+        }
+    </style>
+    <script>
+        var beautify = function(str,lang){
+            str =  str.replace(/&((g|l|quo)t|amp|#39|nbsp);/g, function (m) {
+                return {
+                    '&lt;':'<',
+                    '&amp;':'&',
+                    '&quot;':'"',
+                    '&gt;':'>',
+                    '&#39;':"'",
+                    '&nbsp;':' '
+                }[m]
+            });
+            var defualtOpt = {
+                "indent_size": 4,
+                "indent_char": " ",
+                "indent_level": 0,
+                "indent_with_tabs": false,
+                "preserve_newlines": true,
+                "max_preserve_newlines": 10,
+                "jslint_happy": false,
+                "brace_style": "collapse",
+                "keep_array_indentation": false,
+                "keep_function_indentation": false,
+                "space_before_conditional": true,
+                "break_chained_methods": false,
+                "eval_code": false,
+                "unescape_strings": false,
+                "wrap_line_length": 0
+            };
+            var html = '';
+            switch(lang){
+                case 'javascript':
+                    html = js_beautify(str,defualtOpt);break;
+                case 'css':
+                    html = css_beautify(str,defualtOpt);break;
+                case 'html':
+                    html = html_beautify(str,defualtOpt);break;
+            }
+
+            return html.replace( /[&<">'](?:(amp|lt|quot|gt|#39|nbsp);)?/g, function (a, b) {
+                if (b) {
+                    return a;
+                } else {
+                    return {
+                        '<':'&lt;',
+                        '&':'&amp;',
+                        '"':'&quot;',
+                        '>':'&gt;',
+                        "'":'&#39;'
+                    }[a]
+                }
+
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top ue-docs-nav" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/ueditor" class="navbar-brand">UEditor Docs</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="http://ueditor.baidu.com/website/onlinedemo.html" target="_blank">演示</a>
+                </li>
+                <li>
+                    <a href="http://ueditor.baidu.com" target="_blank">官网</a>
+                </li>
+                <li>
+                    <a href="https://github.com/fex-team/ueditor/issues" target="_blank">论坛</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="ue-docs-caption">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>UEditor文档</h1>
+                <p>UEditor富文本编辑器，轻量，可定制，注重用户体验。</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container ue-docs-container">
+    <div class="row">
+        <div class="col-md-3">
+            <div id="guidebar" class="ue-sidebar hidden-print" role="complementary">
+                <ul class="nav ue-sidenav"></ul>
+            </div>
+        </div>
+        <div class="col-md-9 ue-docs-main" role="main">
+            <div id="show"></div>
+        </div>
+    </div>
+</div>
+<div class="ue-footer" role="contentinfo">
+    <div class="container">
+        <ul class="footer-links">
+            <li>UEditor Docs</li>
+            <li class="muted">·</li>
+            <li>Version 1.3.5</li>
+            <li class="muted">·</li>
+            <li><a href="https://github.com/fex-team/ueditor" target="_blank">Fork me on github</a></li>
+        </ul>
+    </div>
+</div>
+
+<script src="js/list.js"></script>
+<script src="js/doc.js"></script>
+</body>
+</html>
